@@ -67,7 +67,7 @@ document.onkeydown = function(keydown) {
 	// list focused 
 	else if (focusedList > 0) {
 		// Enter
-		if (key == 13 && focusedItem != 0) {
+		if (key == 13 && focusedItem > -1) {
 			openLink(focusedItem + 1);
 			focusedList = -1;
 			focusedItem = -1;
