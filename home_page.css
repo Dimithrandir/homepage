@@ -56,7 +56,11 @@ li a {
 	padding: 0px 17px; 
 }
 
-li a:hover, li a.hover {
+li a:hover {
+	background: #303030;
+}
+
+.focused {
 	background: #303030;
 }
 
@@ -76,4 +80,26 @@ li a:hover, li a.hover {
 @keyframes mymove {
 	to {width: 150px;}
 	to {height: 150px; }
+}
+
+#help {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: right;
+}
+
+#help span {
+	margin-right: 5px;
+	opacity: 50%;
+}
+
+#instruct {
+	display: none;
+	font-size: 12px;
+}
+
+#question-mark:hover + #instruct, #instruct:hover{
+	display: inline;
+	opacity: 100%;
 }

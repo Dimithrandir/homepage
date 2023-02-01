@@ -8,17 +8,37 @@ var catNum = document.getElementById("container").children.length;
 // set picture
 document.getElementById("pic").src = picsDir + pics[Math.floor(Math.random() * pics.length)];
 
-function highlightList(listIdNum) {
+// defocus links on category list mousever
+for (var i = 1; i <= catNum; i++) {
+	listEl = document.getElementById("l" + i);
+	listEl.addEventListener("mouseover", event => {
+		focusedItem = -1;
+		highlightList();
+	});
+}
+
+function highlightList() {
+	// defocus item
+	focusedLinks = document.getElementsByClassName("focused");
+	if (focusedLinks.length > 0)
+		focusedLinks[0].className = "";
 	// highlight all
-	if(listIdNum == -1) {
-		for (var i = 1; i <= catNum; i++) {
+	if(focusedList == -1) {
+		for (var i = 1; i <= catNum; i++)
  			document.getElementById("l" + i).style.opacity = "100%";
-		}
 		return;
 	}
 	// highlight focused
 	for (var i = 1; i <= catNum; i++) {
-		document.getElementById("l" + i).style.opacity = (i != listIdNum) ? "50%" : "100%";
+		listEl = document.getElementById("l" + i);
+		linksEl = listEl.getElementsByTagName("a");
+		if (i == focusedList) {
+			listEl.style.opacity = "100%";
+			if (focusedItem >= 0)
+				linksEl[focusedItem].className = "focused";
+		}
+		else
+			listEl.style.opacity = "50%";
 	}
 }
 
@@ -33,33 +53,55 @@ document.onkeydown = function(keydown) {
 	// no list focused
 	if (focusedList < 0) {
 		// left
-		if (key == 37 || key == 72) {
+		if (key == 37 || key == 72)
 			focusedList = catNum;		
-		}
 		// right
-		else if (key == 39 || key == 76) {
+		else if (key == 39 || key == 76)
 			focusedList = 1;		
-		}
 		// 1-9
-		else if (key >= 49 && key <= 57) {
+		else if (key >= 49 && key <= 57)
 			focusedList = (key - 48 > catNum) ? catNum : key - 48;
-		}
 		else
 			return;
 	}
 	// list focused 
 	else if (focusedList > 0) {
+		// Enter
+		if (key == 13 && focusedItem != 0) {
+			openLink(focusedItem + 1);
+			focusedList = -1;
+			focusedItem = -1;
+		}
 		// ESC
-		if (key == 27) {
-			focusedList = -1;		
+		else if (key == 27) {
+			focusedList = -1;
+			focusedItem = -1;
 		}
 		// left
 		else if (key == 37 || key == 72) {
 			focusedList = (focusedList > 1) ? focusedList - 1 : catNum;
+			focusedItem = -1;
 		}
 		// right
 		else if (key == 39 || key == 76) {
 			focusedList = (focusedList < catNum) ? focusedList + 1 : 1;
+			focusedItem = -1;
+		}
+		// down
+		else if (key == 40 || key == 74) {
+			linksNum = document.getElementById("l"+focusedList).getElementsByTagName("a").length; 
+			if (focusedItem == -1 || focusedItem == linksNum - 1)
+				focusedItem = 0;
+			else
+				focusedItem++;
+		}
+		// up
+		else if (key == 38 || key == 75) {
+			linksNum = document.getElementById("l"+focusedList).getElementsByTagName("a").length; 
+			if (focusedItem <= 0)
+				focusedItem = linksNum - 1;
+			else
+				focusedItem--;
 		}
 		// 1-9
 		else if (key >= 49 && key <= 57) {
@@ -69,8 +111,8 @@ document.onkeydown = function(keydown) {
 		// anything else
 		else {
 			focusedList = -1;
+			focusedItem = -1;
 		}
 	}
-
-	highlightList(focusedList);
+	highlightList();
 }
