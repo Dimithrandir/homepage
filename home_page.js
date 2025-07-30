@@ -1,12 +1,12 @@
-var picsDir = "img/";
-var pics = ["FgBmapfVIAAK0RG", "Fk6t4aoXgAAt9-8", "FkqvMPHXwAAZRdS"];
+const PICS_DIR = "img/";
+const PICS = ["FgBmapfVIAAK0RG", "Fk6t4aoXgAAt9-8", "FkqvMPHXwAAZRdS"];
 
 var focusedList = -1;
 var focusedItem = -1;
 var catNum = document.getElementById("container").children.length;
 
 // set picture
-document.getElementById("pic").src = picsDir + pics[Math.floor(Math.random() * pics.length)];
+document.getElementById("pic").src = PICS_DIR + PICS[Math.floor(Math.random() * PICS.length)];
 
 // defocus links on category list mousever
 for (var i = 1; i <= catNum; i++) {
