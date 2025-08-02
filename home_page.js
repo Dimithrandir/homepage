@@ -1,20 +1,40 @@
-const PICS_DIR = "img/";
-const PICS = ["FgBmapfVIAAK0RG", "Fk6t4aoXgAAt9-8", "FkqvMPHXwAAZRdS"];
-
 var focusedList = -1;
 var focusedItem = -1;
-var catNum = document.getElementById("container").children.length;
+var catNum = CATS.length;
 
 // set picture
 document.getElementById("pic").src = PICS_DIR + PICS[Math.floor(Math.random() * PICS.length)];
 
-// defocus links on category list mousever
-for (var i = 1; i <= catNum; i++) {
-	listEl = document.getElementById("l" + i);
-	listEl.addEventListener("mouseover", event => {
+var container = document.getElementById("container");
+
+// build categories
+for (let i = 1; i <= catNum; i++) {
+	let cat = CATS[i-1];
+
+	let catUl = document.createElement("ul");
+	catUl.id = `l${i}`;
+	// defocus links on category list mousever
+	catUl.addEventListener("mouseover", event => {
 		focusedItem = -1;
 		highlightList();
 	});
+
+	let titleLi = document.createElement("li");
+	titleLi.id = `l${i}-title`;
+	titleLi.textContent = cat.title;
+
+	catUl.append(titleLi);
+
+	for (link of cat.links) {
+		let linkLi = document.createElement("li");
+		let linkA = document.createElement("a");
+		linkA.textContent = link.text;
+		linkA.setAttribute("href", link.url);
+		linkLi.append(linkA);
+		catUl.append(linkLi);
+	}
+
+	container.append(catUl);
 }
 
 function highlightList() {
