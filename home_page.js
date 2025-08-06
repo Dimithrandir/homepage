@@ -25,7 +25,7 @@ for (let i = 1; i <= catNum; i++) {
 
 	catUl.append(titleLi);
 
-	for (link of cat.links) {
+	for (let link of cat.links) {
 		let linkLi = document.createElement("li");
 		let linkA = document.createElement("a");
 		linkA.textContent = link.text;
@@ -44,12 +44,12 @@ function highlightList() {
 		focusedLinks[0].className = "";
 	// highlight all
 	if(focusedList == -1) {
-		for (var i = 1; i <= catNum; i++)
+		for (let i = 1; i <= catNum; i++)
  			document.getElementById("l" + i).style.opacity = "100%";
 		return;
 	}
 	// highlight focused
-	for (var i = 1; i <= catNum; i++) {
+	for (let i = 1; i <= catNum; i++) {
 		listEl = document.getElementById("l" + i);
 		linksEl = listEl.getElementsByTagName("a");
 		if (i == focusedList) {
@@ -63,13 +63,13 @@ function highlightList() {
 }
 
 function openLink(linkIndex) {
-	var focusedListItems = document.getElementById("l"+focusedList).children;
+	let focusedListItems = document.getElementById("l"+focusedList).children;
 	if (linkIndex < focusedListItems.length)
 		window.open(focusedListItems[linkIndex].children[0].getAttribute("href"), "_self", false);
 }
 
 document.onkeydown = function(keydown) {
-	var key = keydown.keyCode;
+	let key = keydown.keyCode;
 	// no list focused
 	if (focusedList < 0) {
 		// left
@@ -135,4 +135,4 @@ document.onkeydown = function(keydown) {
 		}
 	}
 	highlightList();
-}
+};
