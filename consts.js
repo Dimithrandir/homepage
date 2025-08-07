@@ -1,5 +1,5 @@
 const PICS_DIR = "img/";
-const PICS = ["FgBmapfVIAAK0RG", "Fk6t4aoXgAAt9-8", "FkqvMPHXwAAZRdS"];
+const PICS = ["FgBmapfVIAAK0RG.jpg", "Fk6t4aoXgAAt9-8.jpg", "FkqvMPHXwAAZRdS.jpg"];
 const CATS = [
 	{
 		title: "cat 1",
