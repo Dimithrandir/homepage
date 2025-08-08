@@ -92,22 +92,22 @@ document.onkeydown = function(keydown) {
 			focusedList = -1;
 			focusedItem = -1;
 		}
-		// ESC
-		else if (key == 27) {
+		// ESC Q
+		else if (key == 27 || key == 81) {
 			focusedList = -1;
 			focusedItem = -1;
 		}
-		// left
+		// left H
 		else if (key == 37 || key == 72) {
 			focusedList = (focusedList > 1) ? focusedList - 1 : catNum;
 			focusedItem = -1;
 		}
-		// right
+		// right L
 		else if (key == 39 || key == 76) {
 			focusedList = (focusedList < catNum) ? focusedList + 1 : 1;
 			focusedItem = -1;
 		}
-		// down
+		// down J
 		else if (key == 40 || key == 74) {
 			linksNum = document.getElementById("l"+focusedList).getElementsByTagName("a").length; 
 			if (focusedItem == -1 || focusedItem == linksNum - 1)
@@ -115,7 +115,7 @@ document.onkeydown = function(keydown) {
 			else
 				focusedItem++;
 		}
-		// up
+		// up K
 		else if (key == 38 || key == 75) {
 			linksNum = document.getElementById("l"+focusedList).getElementsByTagName("a").length; 
 			if (focusedItem <= 0)
@@ -123,16 +123,30 @@ document.onkeydown = function(keydown) {
 			else
 				focusedItem--;
 		}
+		// g
+		else if (key == 71 && !keydown.shiftKey) {
+			focusedItem = 0;
+		}
+		// G
+		else if (key == 71 && keydown.shiftKey) {
+			linksNum = document.getElementById("l"+focusedList).getElementsByTagName("a").length; 
+			focusedItem = linksNum - 1;
+		}
 		// 1-9
 		else if (key >= 49 && key <= 57) {
 			openLink(key - 48);
 			focusedList = -1;
+		}
+		// shift
+		else if (key == 16) {
+			return;
 		}
 		// anything else
 		else {
 			focusedList = -1;
 			focusedItem = -1;
 		}
+
 	}
 	highlightList();
 };
